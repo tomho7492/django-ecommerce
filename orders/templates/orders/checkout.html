@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        
+        <ul>
+        {% for order in Orders %}
+         
+         <h1>Current Orders:</h1>
+         <li>
+            <a href="/orders/{{order.id}}">Order</a>
+
+         </li>
+         
+
+        {% endfor %}
+    </ul>
+<hr>
+        
+    </head>
+    
+</html>

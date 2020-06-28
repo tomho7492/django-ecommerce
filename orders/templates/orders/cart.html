@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+
+
+
+        <script>
+             document.addEventListener('DOMContentLoaded', () => {
+                removeBtns = document.querySelectorAll("#remove");
+                removeBtns.forEach((element) => {
+                    
+                   element.onclick = () => {
+                       element.parentElement.remove();
+                      
+                   };
+                });
+
+             });
+               
+        </script>
+
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-10 col-md-offset-1">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th class="text-center">Price</th>
+                        <th class="text-center">Total</th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pizza in pizzas %}
+                    
+                    <tr>
+                        <td class="col-sm-8 col-md-6">
+                        <div class="media">
+                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/72/product-icon.png" style="width: 72px; height: 72px;"> </a>
+                            <div class="media-body">
+                                <h4 class="media-heading"><a href="#">{{pizza.pizzas.type}} </a></h4>
+                                <h5 class="media-heading"> {{pizza.pizzas.toppingAmount}} toppings</h5>
+                            </div>
+                        </div></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>{{pizza.Quantity}}</strong></td>
+
+                        </td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>${{pizza.pizzas.cost}}</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>${{pizza.Cost}}</strong></td>
+                        <td class="col-sm-1 col-md-1">
+                            <form action="{% url 'removeFromCart' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="HIDDEN" value="{{pizza.id}}" name="cartItem">
+                             <button id="remove" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-remove"></span> Remove
+                        </button>
+                    </form>
+                    </td>
+                    </tr>
+
+                    {% endfor %}
+                
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td><h3>Total</h3></td>
+                        <td class="text-right"><h3><strong>${{totalCost}}</strong></h3></td>
+                    </tr>
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>
+                        <button type="button" class="btn btn-default" onclick="window.location.href='/'">
+                            <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
+                        </button></td>
+                        <td>
+                        <button type="button" class="btn btn-success" onclick="window.location.href='/checkout'">
+                            Checkout <span class="glyphicon glyphicon-play"></span>
+                        </button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+        <title>Shopping Cart</title>
+    </head>
+
+ 
+</html>
